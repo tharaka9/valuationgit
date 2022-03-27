@@ -1,75 +1,66 @@
-<?php
+<?php 
 require_once('../../config.php');
-if(isset($_GET['id'])){
-    $qry = $conn->query("SELECT * FROM `branch_list` where id = '{$_GET['id']}'");
-    if($qry->num_rows > 0){
-        $res = $qry->fetch_array();
-        foreach($res as $k => $v){
-            if(!is_numeric($k))
-            $$k = $v;
-        }
-    }
-}
+
+$name = $_POST['name'];
+
+switch ($name) {
+    case "customer":
 ?>
 
-<div class="container-fluid">
-    <form action="" id="category-form">
-        <input type="hidden" name="id" value="<?php echo isset($id) ? $id : '' ?>">
-        <div class="form-group">
-            <input type="text" name="name" id="name" class="form-control form-control-border" placeholder="Branch Name" value ="<?php echo isset($name) ? $name : '' ?>" required>
-        </div>
-        <div class="form-group">
-            <input type="text" name="remark" id="remark" class="form-control form-control-border" placeholder="Remark" value ="<?php echo isset($remark) ? $remark : '' ?>" required>
-        </div>
-       
-        <div class="form-group">
-            <select name="status" id="status" class="form-control form-control-border" required>
-                <option value="1" <?= isset($status) && $status == 1 ? "selected" :"" ?>>Active</option>
-                <option value="0" <?= isset($status) && $status == 0 ? "selected" :"" ?>>Inactive</option>
-            </select>
-        </div>
-    </form>
-</div>
-<script>
-    $(function(){
-        $('#uni_modal #category-form').submit(function(e){
-            e.preventDefault();
-            var _this = $(this)
-            $('.pop-msg').remove()
-            var el = $('<div>')
-                el.addClass("pop-msg alert")
-                el.hide()
-            start_loader();
-            $.ajax({
-                url:_base_url_+"classes/Master.php?f=save_branch",
-				data: new FormData($(this)[0]),
-                cache: false,
-                contentType: false,
-                processData: false,
-                method: 'POST',
-                type: 'POST',
-                dataType: 'json',
-				error:err=>{
-					console.log(err)
-					alert_toast("An error occured",'error');
-					end_loader();
-				},
-                success:function(resp){
-                    if(resp.status == 'success'){
-                        location.reload();
-                    }else if(!!resp.msg){
-                        el.addClass("alert-danger")
-                        el.text(resp.msg)
-                        _this.prepend(el)
-                    }else{
-                        el.addClass("alert-danger")
-                        el.text("An error occurred due to unknown reason.")
-                        _this.prepend(el)
-                    }
-                    el.show('slow')
-                    end_loader();
-                }
-            })
-        })
-    })
-</script>
+<h1 class="text-center">Customers</h1>
+<table id="mytable" class="table table-striped table-bordered">
+			<colgroup>
+					<col width="10%">
+					<col width="10%">
+					<col width="10%">
+					<col width="10%">
+					<col width="10%">
+					<col width="10%">
+				</colgroup>
+				<thead>
+					<tr>
+						<th>Customer Name</th>
+						<th>Address</th>
+						<th>Email</th>
+						<th>Contact No</th>
+						<th>Paid Amount</th>
+                        <th>Date</th>
+					</tr>
+				</thead>
+				<tbody>
+					<?php 
+						$i = 1;
+						$qry = $conn->query("SELECT inquery_list.name, inquery_list.address, inquery_list.email, inquery_list.contactno, payment_status.fullamount, payment_status.date_created from inquery_list INNER JOIN payment_status ON inquery_list.id = payment_status.uid ORDER by inquery_list.id");
+						while($row = $qry->fetch_assoc()):
+						
+					?>
+						<tr>
+                            <td><?php echo ucwords($row['name']) ?></td>
+                            <td><?php echo ucwords($row['address']) ?></td>
+                            <td><?php echo ucwords($row['email']) ?></td>
+                            <td><?php echo ucwords($row['contactno']) ?></td>
+                            <td><?php echo ucwords($row['fullamount']) ?></td>
+							<td class=""><?php echo date("Y-m-d H:i",strtotime($row['date_created'])) ?></td>
+						</tr>
+					<?php endwhile; ?>
+				</tbody>
+			</table>
+
+            
+<?php        break;
+    case "action":
+      echo "Your favorite color is action!";
+        break;
+    case "test1":
+      echo "Your favorite color is test1!";
+        break;
+    case "test2":
+        echo "Your favorite color is test2!";
+        break;
+    default:
+      echo "Your favorite color is neither red, blue, nor green!";
+  }
+
+
+
+?>

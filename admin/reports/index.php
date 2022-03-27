@@ -1,55 +1,80 @@
-  
-<style>
 
-.border-start-primary{
-border-left-color: #00ac69 !important;
-border-left-width: 0.25rem !important;
-color: #00ac69 !important;
+ <style>
+#mytable {
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
 }
 
-</style>
- 
- 
-  <div class="container-fluid">
+#mytable td, #mytable th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
 
-		<div class="row">
-                            <div class="col-xl-3 col-md-6">
-                                <div class="card mb-4 border-start-primary">
-                                    <div class="card-body text-center">Total Inquiries</div>
-									<h6 class="text-center">10</h6>
-                                    <div class="card-footer d-flex align-items-center justify-content-between">
-                                        <a class="small stretched-link" href="#">View Details</a>
-                                        <div class="small "><i class="fas fa-angle-right"></i></div>
-                                    </div>
-                                </div>
-                            </div>
-							<div class="col-xl-3 col-md-6">
-                                <div class="card mb-4 border-start-primary">
-                                    <div class="card-body">Success Card</div>
-                                    <div class="card-footer d-flex align-items-center justify-content-between">
-                                        <a class="small stretched-link" href="#">View Details</a>
-                                        <div class="small "><i class="fas fa-angle-right"></i></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-xl-3 col-md-6">
-                                <div class="card mb-4 border-start-primary">
-                                    <div class="card-body">Success Card</div>
-                                    <div class="card-footer d-flex align-items-center justify-content-between">
-                                        <a class="small stretched-link" href="#">View Details</a>
-                                        <div class="small "><i class="fas fa-angle-right"></i></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-xl-3 col-md-6">
-                                <div class="card mb-4 border-start-primary">
-                                    <div class="card-body">Success Card</div>
-                                    <div class="card-footer d-flex align-items-center justify-content-between">
-                                        <a class="small stretched-link" href="#">View Details</a>
-                                        <div class="small "><i class="fas fa-angle-right"></i></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+#mytable tr:nth-child(even){background-color: #f2f2f2;}
 
-		</div>
+#mytable tr:hover {background-color: #ddd;}
+
+#mytable th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #506F8A;
+  color: white;
+}
+
+ </style>
+ 
+<div class="container-fluid">
+
+<div class="row">
+    <div class="col-md-12 school-options-dropdown text-center">
+    <div class="dropdown btn-group">
+
+        <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Choose a Report
+
+        </button>
+
+        <div class="dropdown-menu">
+            <a class="dropdown-item" id="customer" href="#">Customers</a>
+            <a class="dropdown-item" id="test1" href="#">Test1</a>
+            <a class="dropdown-item" id="test2" href="#">Test2</a>
+            <a class="dropdown-item" id="test3" href="#">Test3</a>
+        </div>
+
+    </div>
+    </div>
+</div>
+<div class="dropdown-divider" style="border-top: 1px solid #000;"></div>
+
+<div id="table-container">
+<h4 class="text-center" style="margin-top: 15%;">Report Will Show Here</h4>
+
+</div>
+
+</div>
+
+
+<script>
+
+$(document).on('click','.dropdown-item',function(e){
+    var name = $(this).attr("id");
+
+    $.ajax({
+      url: _base_url_+'admin/reports/manage_category.php',
+      type: 'POST',
+      data: {
+        'name': name,
+      },
+      success: function(data){
+        $("#table-container").html(data);
+                    $('#mytable').DataTable({ 
+                      "destroy": true, //use for reinitialize datatable
+                   });
+        
+      }
+
+    });
+});
+
+</script>

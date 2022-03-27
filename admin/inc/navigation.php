@@ -106,15 +106,15 @@
                       </a>
                     </li>
                     <li class="nav-item dropdown">
-                      <a href="<?php echo base_url ?>admin/?page=reports" class="nav-link nav-user_list">
-                        <i class="nav-icon fas fa-users-cog"></i>
+                      <a href="<?php echo base_url ?>admin/?page=reports" class="nav-link">
+                        <i class="nav-icon fas fa-file-alt"></i>
                         <p>
                           Reports
                         </p>
                       </a>
                     </li>
                     <li class="nav-item dropdown">
-                      <a href="<?php echo base_url ?>admin/?page=user/list" class="nav-link nav-user_list">
+                      <a href="<?php echo base_url ?>admin/?page=user/list" class="nav-link">
                         <i class="nav-icon fas fa-users-cog"></i>
                         <p>
                           User List
@@ -122,7 +122,7 @@
                       </a>
                     </li>
                     <li class="nav-item dropdown">
-                      <a href="<?php echo base_url ?>admin/?page=system_info" class="nav-link nav-system_info">
+                      <a href="<?php echo base_url ?>admin/?page=system_info" class="nav-link">
                         <i class="nav-icon fas fa-cogs"></i>
                         <p>
                           Settings

@@ -19,17 +19,20 @@
         <div class="container-fluid">
 			<table class="table table-hover table-striped">
 				<colgroup>
-					<col width="5%">
-					<col width="15%">
-					<col width="15%">
-					<col width="15%">
-					<col width="25%">
-					<col width="15%">
+					<col width="10%">
+					<col width="10%">
+					<col width="10%">
+					<col width="10%">
+					<col width="10%">
+					<col width="10%">
+					<col width="10%">
+					<col width="10%">
+					<col width="10%">
+					<col width="10%">
 					<col width="10%">
 				</colgroup>
-				<thead>
+				<thead style="font-size: 0.8rem;">
 					<tr>
-						<th>#</th>
 						<th>Date Created</th>
 						<th>Customer Name</th>
 						<th>Customer Address</th>
@@ -39,17 +42,16 @@
 						<th>Branch</th>
 						<th>Attraction Person</th>
 						<th>Payment Collection Person</th>
+						<th>Inquery Added</th>
 						<th>Action</th>
 					</tr>
 				</thead>
-				<tbody>
+				<tbody style="font-size: 0.8rem;">
 					<?php 
-						$i = 1;
-						$qry = $conn->query("SELECT inquery_list.id, inquery_list.date_created, inquery_list.name, inquery_list.address, inquery_list.email, inquery_list.contactno, inquery_list.attractionperson, inquery_list.paymentcollectionperson, inquery_list.status, finance_company_list.name as fname, branch_list.name as bname FROM `inquery_list` INNER JOIN `branch_list` ON `inquery_list`.branch_id = `branch_list`.id INNER JOIN `finance_company_list` on `inquery_list`.finance_id = `finance_company_list`.id ");
+						$qry = $conn->query("SELECT inquery_list.id, inquery_list.date_created, inquery_list.name, inquery_list.address, inquery_list.email, inquery_list.contactno, inquery_list.attractionperson, inquery_list.paymentcollectionperson, inquery_list.status, finance_company_list.name AS fname, branch_list.name AS bname, users.firstname AS uname FROM `inquery_list` INNER JOIN `branch_list` ON `inquery_list`.branch_id = `branch_list`.id INNER JOIN `finance_company_list` ON `inquery_list`.finance_id = `finance_company_list`.id INNER JOIN users ON inquery_list.uid = users.id");
 						while($row = $qry->fetch_assoc()):
 					?>
 						<tr>
-							<td class="text-center"><?php echo $i++; ?></td>
 							<td class=""><?php echo date("Y-m-d H:i",strtotime($row['date_created'])) ?></td>
 							<td><?php echo ucwords($row['name']) ?></td>
 							<td><?php echo ucwords($row['address']) ?></td>
@@ -59,6 +61,7 @@
 							<td class=""><?php echo ucwords($row['bname'] ? $row['bname'] : "") ?></td>
 							<td><?php echo ucwords($row['attractionperson']) ?></td>
 							<td><?php echo ucwords($row['paymentcollectionperson']) ?></td>
+							<td><?php echo ucwords($row['uname']) ?></td>
 							<td align="center">
 								 <button type="button" class="btn btn-flat btn-default btn-sm dropdown-toggle dropdown-icon" data-toggle="dropdown">
 				                  		Action

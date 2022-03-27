@@ -42,7 +42,7 @@ if(isset($_GET['id'])){
                             </div>
                             <div class="form-group">
                                 <label for="price" class="control-label text-dark">Valuation Fee</label>
-                                <input type="text" name="companyfee" id="companyfee" class="form-control form-control-border" placeholder="" value ="<?php echo isset($res['valuationfee']) ? $res['valuationfee'] :"" ?>" required>
+                                <input type="text" name="valuationfee" id="valuationfee" class="form-control form-control-border" placeholder="" value ="<?php echo isset($res['valuationfee']) ? $res['valuationfee'] :"" ?>" required>
                             </div>
                             <div class="form-group">
                                 <label for="price" class="control-label text-dark">Finance Company Fee</label>

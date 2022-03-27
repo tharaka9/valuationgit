@@ -35,7 +35,7 @@ color: #00ac69 !important;
 <div class="container-fluid">
 
 		<div class="row">
-                            <div class="col-xl-3 col-md-6">
+                            <div class="col-xl-4 col-md-6">
                                 <div class="card mb-4 border-start-primary">
                                     <div class="card-body text-center">Total Inquiries</div>
 									<h6 class="text-center"><?php echo isset($res['id']) ? $res['id'] : '' ?></h6>
@@ -45,7 +45,7 @@ color: #00ac69 !important;
                                     </div>
                                 </div>
                             </div>
-							<div class="col-xl-3 col-md-6">
+							<div class="col-xl-4 col-md-6">
                                 <div class="card mb-4 border-start-primary">
                                     <div class="card-body text-center">Total Valuation Companies</div>
                                     <h6 class="text-center"><?php echo isset($res1['id']) ? $res1['id'] : '' ?></h6>
@@ -55,19 +55,10 @@ color: #00ac69 !important;
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-xl-3 col-md-6">
+                            <div class="col-xl-4 col-md-6">
                                 <div class="card mb-4 border-start-primary">
                                     <div class="card-body text-center">This Month Total Amount</div>
                                     <h6 class="text-center">Rs. <?php echo isset($res2['fullamount']) ? $res2['fullamount'] : '' ?></h6>
-                                    <div class="card-footer d-flex align-items-center justify-content-between">
-                                        <a class="small stretched-link" href="#">View Details</a>
-                                        <div class="small "><i class="fas fa-angle-right"></i></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-xl-3 col-md-6">
-                                <div class="card mb-4 border-start-primary">
-                                    <div class="card-body text-center">Success Card</div>
                                     <div class="card-footer d-flex align-items-center justify-content-between">
                                         <a class="small stretched-link" href="#">View Details</a>
                                         <div class="small "><i class="fas fa-angle-right"></i></div>
