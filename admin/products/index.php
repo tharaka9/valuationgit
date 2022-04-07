@@ -48,7 +48,27 @@
 				</thead>
 				<tbody style="font-size: 0.8rem;">
 					<?php 
-						$qry = $conn->query("SELECT inquery_list.id, inquery_list.date_created, inquery_list.name, inquery_list.address, inquery_list.email, inquery_list.contactno, inquery_list.attractionperson, inquery_list.paymentcollectionperson, inquery_list.status, finance_company_list.name AS fname, branch_list.name AS bname, users.firstname AS uname FROM `inquery_list` INNER JOIN `branch_list` ON `inquery_list`.branch_id = `branch_list`.id INNER JOIN `finance_company_list` ON `inquery_list`.finance_id = `finance_company_list`.id INNER JOIN users ON inquery_list.uid = users.id");
+						$qry = $conn->query("SELECT
+						inquery_list.id,
+						inquery_list.date_created,
+						inquery_list.name,
+						inquery_list.address,
+						inquery_list.email,
+						inquery_list.contactno,
+						inquery_list.attractionperson,
+						inquery_list.paymentcollectionperson,
+						inquery_list.status,
+						finance_company_list.name AS fname,
+						branch_list.name AS bname,
+						users.firstname AS uname,
+						employee_list.fname AS emp_fname,
+						employee_list.lname AS emp_lname
+					FROM
+						`inquery_list`
+					INNER JOIN `branch_list` ON `inquery_list`.branch_id = `branch_list`.id
+					INNER JOIN `finance_company_list` ON `inquery_list`.finance_id = `finance_company_list`.id
+					INNER JOIN `users` ON `inquery_list`.uid = `users`.id
+					INNER JOIN `employee_list` ON `inquery_list`.paymentcollectionperson = `employee_list`.id");
 						while($row = $qry->fetch_assoc()):
 					?>
 						<tr>
@@ -60,7 +80,7 @@
 							<td class=""><?php echo ucwords($row['fname'] ? $row['fname'] : "") ?></td>
 							<td class=""><?php echo ucwords($row['bname'] ? $row['bname'] : "") ?></td>
 							<td><?php echo ucwords($row['attractionperson']) ?></td>
-							<td><?php echo ucwords($row['paymentcollectionperson']) ?></td>
+							<td class=""><?php echo ucwords($row['emp_fname']." ".$row['emp_lname'] ? $row['emp_fname']." ".$row['emp_lname'] : "") ?></td>
 							<td><?php echo ucwords($row['uname']) ?></td>
 							<td align="center">
 								 <button type="button" class="btn btn-flat btn-default btn-sm dropdown-toggle dropdown-icon" data-toggle="dropdown">

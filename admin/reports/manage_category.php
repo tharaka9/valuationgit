@@ -48,8 +48,51 @@ switch ($name) {
 
             
 <?php        break;
-    case "action":
-      echo "Your favorite color is action!";
+    case "finance":
+?>
+		<h1 class="text-center">Finance Company</h1>
+		<table id="mytable" class="table table-striped table-bordered">
+					<colgroup>
+							<col width="10%">
+							<col width="10%">
+							<col width="10%">
+							<col width="10%">
+						</colgroup>
+						<thead>
+							<tr>
+								<th>Finance Company</th>
+								<th>Branch</th>
+								<th>Amount</th>
+								<th>Date</th>
+							</tr>
+						</thead>
+						<tbody>
+							<?php 
+								$i = 1;
+								$qry = $conn->query("SELECT
+								finance_company_list.name,
+								branch_list.name AS bname,
+								payment_status.companyfee,
+								payment_status.date_created
+							FROM
+								inquery_list
+							INNER JOIN payment_status ON inquery_list.uid = payment_status.uid
+							INNER JOIN finance_company_list ON inquery_list.finance_id = finance_company_list.id
+							INNER JOIN branch_list ON inquery_list.branch_id = branch_list.id");
+								while($row = $qry->fetch_assoc()):
+								
+							?>
+								<tr>
+									<td><?php echo ucwords($row['name']) ?></td>
+									<td><?php echo ucwords($row['bname']) ?></td>
+									<td><?php echo ucwords($row['companyfee']) ?></td>
+									<td class=""><?php echo date("Y-m-d H:i",strtotime($row['date_created'])) ?></td>
+								</tr>
+							<?php endwhile; ?>
+						</tbody>
+				</table>
+
+				<?php
         break;
     case "test1":
       echo "Your favorite color is test1!";

@@ -83,67 +83,16 @@ if(isset($_GET['id'])){
                             </div>
                             <div class="form-group">
                                 <label for="paymentcollectionperson" class="control-label text-dark">Payment Collection Person</label>
-                                <input type="text" name="paymentcollectionperson" id="paymentcollectionperson" class="form-control form-control-border" placeholder="" value ="<?php echo isset($paymentcollectionperson) ? $paymentcollectionperson : "" ?>" required>
+                                <select name="paymentcollectionperson" id="paymentcollectionperson" class="form-control form-control-border select2" data-placeholder="" required>
+                                    <option value="" disabled <?= !isset($paymentcollectionperson) ? 'selected' : '' ?>>Active</option>
+                                    <?php 
+                                    $qry = $conn->query("SELECT * FROM `employee_list` where `status` = 1 ".(isset($paymentcollectionperson) ? " or id = '{$paymentcollectionperson}'" : "" )." order by `fname` asc");
+                                    while($row = $qry->fetch_assoc()):
+                                    ?>
+                                    <option value="<?= $row['id'] ?>" <?= $row['status'] == 0 ? 'disabled' : '' ?> <?= isset($paymentcollectionperson) && $paymentcollectionperson == $row['id'] ? 'selected' : '' ?>><?= ucwords($row['fname']." ".$row['lname']) ?></option>
+                                    <?php endwhile; ?>
+                                </select>
                             </div>
-                            <!-- <div class="form-group">
-                                <label for="year" class="control-label text-dark">Year</label>
-                                <input type="year" name="year" id="year" class="form-control form-control-border" placeholder="Year" value ="<?php echo isset($year) ? $year : "" ?>" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="mileage" class="control-label text-dark">Mileage</label>
-                                <input type="text" name="mileage" id="mileage" class="form-control form-control-border" placeholder="Mileage" value ="<?php echo isset($mileage) ? $mileage : "" ?>" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="fuel" class="control-label text-dark">Fuel</label>
-                                <input type="text" name="fuel" id="fuel" class="form-control form-control-border" placeholder="Fuel" value ="<?php echo isset($fuel) ? $fuel : "" ?>" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="engine" class="control-label text-dark">Engine</label>
-                                <input type="text" name="engine" id="engine" class="form-control form-control-border" placeholder="engine" value ="<?php echo isset($engine) ? $engine : "" ?>" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="color" class="control-label text-dark">Color</label>
-                                <input type="text" name="color" id="color" class="form-control form-control-border" placeholder="color" value ="<?php echo isset($color) ? $color : "" ?>" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="banner" class="control-label text-dark">Product Cover</label>
-                                <div class="custom-file">
-                                <input type="file" class="custom-file-input" id="customFile" name="banner" onchange="displayMag(this,$(this))" accept="image/png,image/jpeg" <?= !isset($id) ? "required" : "" ?>>
-                                <label class="custom-file-label" for="customFile">Choose file</label>
-                                </div>
-                            </div>
-                            <div class="form-group d-flex justify-content-center">
-                                <img src="<?php echo validate_image(isset($id) ? "uploads/banners/car-{$id}.png?v={$date_updated}" :'') ?>" alt="" id="product-cover" class="img-fluid img-thumbnail bg-dark">
-                            </div>
-                            <div class="form-group">
-                                <label for="images[]" class="control-label text-dark">Add Other Images</label>
-                                <div class="custom-file">
-                                <input type="file" class="custom-file-input" id="customFile" name="images[]" accept="image/png,image/jpeg" <?= !isset($id) ? "required" : "" ?> multiple>
-                                <label class="custom-file-label" for="customFile">Choose file</label>
-                                </div>
-                            </div> -->
-                        </div>
-                        <div class="col-md-6">
-                            <!-- <div class="form-group">
-                                <label for="condition" class="control-label text-dark">Condition</label>
-                                <textarea rows="3" name="condition" id="condition" class="form-control form-control-border summernote" data-height = "40vh" data-placeholder="Write the car condition here." required><?php echo isset($condition) ? $condition : '' ?></textarea>
-                            </div>
-                            <div class="form-group">
-                                <label for="features" class="control-label text-dark">Features</label>
-                                <textarea rows="3" name="features" id="features" class="form-control form-control-border summernote" data-height = "40vh" data-placeholder="Write the car features here." required><?php echo isset($features) ? $features : '' ?></textarea>
-                            </div>
-                            <div class="form-group">
-                                <label for="description" class="control-label text-dark">Description/Content</label>
-                                <textarea rows="3" name="description" id="description" class="form-control form-control-border summernote" data-height = "40vh" data-placeholder="Write the product description here." required><?php echo isset($description) ? $description : '' ?></textarea>
-                            </div>
-                            <?php if($_settings->userdata('type') == 1): ?>
-                            <div class="form-group">
-                                <div class="custom-control custom-checkbox">
-                                    <input class="custom-control-input" type="checkbox" name="status" id="status" <?= isset($status) && $status == 1 ? "checked" : '' ?>>
-                                    <label for="status" class="custom-control-label">Sold</label>
-                                </div>
-                            </div>
-                            <?php endif; ?> -->
                         </div>
                     </div>
                 </div>

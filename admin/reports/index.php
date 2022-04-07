@@ -37,7 +37,7 @@
 
         <div class="dropdown-menu">
             <a class="dropdown-item" id="customer" href="#">Customers</a>
-            <a class="dropdown-item" id="test1" href="#">Test1</a>
+            <a class="dropdown-item" id="finance" href="#">Finance Company</a>
             <a class="dropdown-item" id="test2" href="#">Test2</a>
             <a class="dropdown-item" id="test3" href="#">Test3</a>
         </div>

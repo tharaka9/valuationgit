@@ -1,7 +1,7 @@
 :root {
     --primary: #dbdbdb !important;
     --bg-wood-dark-img: var(--base_url)dis/default/bg-wood-dark.jpg;
-    --bg-gradient: linear-gradient(0deg, rgba(31, 30, 30, 1) 0%, rgba(97, 97, 97, 1) 54%, rgba(57, 57, 57, 1) 90%);
+    --bg-gradient: linear-gradient(0deg, rgba(9,9,121,1) 36%, rgba(5,105,184,1) 50%, rgba(9,9,121,1) 65%);
     --bg-gradient2: linear-gradient(0deg, rgba(255, 101, 101, 1) 0%, rgba(255, 74, 74, 1) 27%, rgba(255, 74, 74, 1) 29%, rgba(255, 163, 163, 1) 87%);
 }
 
