@@ -10,10 +10,17 @@ if(isset($_GET['id'])){
             $k = $v;
         }
     }
-    // if(is_null($date_updated))
-    // $date_updated = strtotime($date_created);
-    // else
-    // $date_updated = strtotime($date_updated);
+ 
+    
+    $qry1 = $conn->query("SELECT * FROM `inquery_list` where id = '{$_GET['id']}'");
+    if($qry1->num_rows > 0){
+        $res1 = $qry1->fetch_array();
+        foreach($res1 as $k => $v){
+            if(!is_numeric($k))
+            $k = $v;
+        }
+    }
+
 }
 
 ?>
@@ -33,6 +40,7 @@ if(isset($_GET['id'])){
         <div class="container-fluid">
             <form action="" id="product-form">
                 <input type="hidden" name="uid" value="<?php echo $uid; ?>">
+                <input type="hidden" name="employee" value="<?php echo $res1['paymentcollectionperson'];?>">
                 <div class="col-12">
                     <div class="row">
                         <div class="col-md-6">

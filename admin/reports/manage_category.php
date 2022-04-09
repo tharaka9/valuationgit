@@ -29,7 +29,6 @@ switch ($name) {
 				</thead>
 				<tbody>
 					<?php 
-						$i = 1;
 						$qry = $conn->query("SELECT inquery_list.name, inquery_list.address, inquery_list.email, inquery_list.contactno, payment_status.fullamount, payment_status.date_created from inquery_list INNER JOIN payment_status ON inquery_list.id = payment_status.uid ORDER by inquery_list.id");
 						while($row = $qry->fetch_assoc()):
 						
@@ -68,7 +67,6 @@ switch ($name) {
 						</thead>
 						<tbody>
 							<?php 
-								$i = 1;
 								$qry = $conn->query("SELECT
 								finance_company_list.name,
 								branch_list.name AS bname,
@@ -94,8 +92,53 @@ switch ($name) {
 
 				<?php
         break;
-    case "test1":
-      echo "Your favorite color is test1!";
+    case "employee":
+?>
+
+		<h1 class="text-center">Employee</h1>
+		<table id="mytable" class="table table-striped table-bordered">
+					<colgroup>
+							<col width="10%">
+							<col width="10%">
+							<col width="10%">
+							<col width="10%">
+							<col width="10%">
+						</colgroup>
+						<thead>
+							<tr>
+								<th>Employee</th>
+								<th>Contact No</th>
+								<th>Email</th>
+								<th>Amount</th>
+								<th>Date</th>
+							</tr>
+						</thead>
+						<tbody>
+							<?php 
+								$qry = $conn->query("SELECT
+								employee_list.fname,
+								employee_list.lname,
+								employee_list.contactno,
+								employee_list.email,
+								payment_status.fullamount,
+								payment_status.date_created
+							FROM
+								employee_list
+							INNER JOIN payment_status ON employee_list.id = payment_status.employee");
+								while($row = $qry->fetch_assoc()):
+								
+							?>
+								<tr>
+									<td><?php echo ucwords($row['fname']." ".$row['lname']) ?></td>
+									<td><?php echo ucwords($row['contactno']) ?></td>
+									<td><?php echo ucwords($row['email']) ?></td>
+									<td><?php echo ucwords($row['fullamount']) ?></td>
+									<td class=""><?php echo date("Y-m-d H:i",strtotime($row['date_created'])) ?></td>
+								</tr>
+							<?php endwhile; ?>
+						</tbody>
+				</table>
+<?php
         break;
     case "test2":
         echo "Your favorite color is test2!";

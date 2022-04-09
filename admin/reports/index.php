@@ -38,8 +38,8 @@
         <div class="dropdown-menu">
             <a class="dropdown-item" id="customer" href="#">Customers</a>
             <a class="dropdown-item" id="finance" href="#">Finance Company</a>
-            <a class="dropdown-item" id="test2" href="#">Test2</a>
-            <a class="dropdown-item" id="test3" href="#">Test3</a>
+            <a class="dropdown-item" id="employee" href="#">Employee</a>
+            <!-- <a class="dropdown-item" id="test3" href="#">Test3</a> -->
         </div>
 
     </div>
